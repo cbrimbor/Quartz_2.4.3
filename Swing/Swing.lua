@@ -50,6 +50,14 @@ local BOOKTYPE_SPELL = BOOKTYPE_SPELL
 local function OnUpdate()
 	if starttime then
 		local spent = GetTime() - starttime
+		local remain = duration - spent
+		if remain < 0.5 then
+			remainingtext:SetTextColor(0,1,0)
+		elseif remain < 2.0 then
+			remainingtext:SetTextColor(1,0,0)
+		else
+			remainingtext:SetTextColor(1,1,1)
+		end
 		remainingtext:SetText(('%.1f'):format(duration - spent))
 		local perc = spent / duration
 		if perc > 1 then
@@ -229,7 +237,7 @@ function QuartzSwing:ApplySettings()
 		else
 			durationtext:Hide()
 		end
-		durationtext:SetFont(media:Fetch('font', QuartzPlayer.db.profile.font), 9)
+		durationtext:SetFont(media:Fetch('font', QuartzPlayer.db.profile.font), 12)
 		durationtext:SetShadowColor( 0, 0, 0, 1)
 		durationtext:SetShadowOffset( 0.8, -0.8 )
 		durationtext:SetTextColor(1,1,1)
@@ -244,7 +252,7 @@ function QuartzSwing:ApplySettings()
 		else
 			remainingtext:Hide()
 		end
-		remainingtext:SetFont(media:Fetch('font', QuartzPlayer.db.profile.font), 9)
+		remainingtext:SetFont(media:Fetch('font', QuartzPlayer.db.profile.font), 12)
 		remainingtext:SetShadowColor( 0, 0, 0, 1)
 		remainingtext:SetShadowOffset( 0.8, -0.8 )
 		remainingtext:SetTextColor(1,1,1)
